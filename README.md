@@ -99,6 +99,23 @@ If this variable is **not set** or has any other value, the application defaults
 
 **Note:** If `NEXT_PUBLIC_IMAGE_STORAGE_MODE` is not set, the application will automatically detect if it's running on Vercel (using the `VERCEL` or `NEXT_PUBLIC_VERCEL_ENV` environment variables) and default to `indexeddb` mode in that case. Otherwise (e.g., running locally), it defaults to `fs` mode. You can always explicitly set the variable to `fs` or `indexeddb` to override this automatic behavior.
 
+#### 🟡 (Optional) Use Azure OpenAI
+
+If you want to use Azure OpenAI instead of the standard OpenAI API, you can configure the following environment variables in your `.env.local` file:
+
+```dotenv
+AZURE_OPENAI_API_KEY=your_azure_openai_api_key_here
+AZURE_OPENAI_API_BASE_URL=your_azure_openai_api_base_url_here
+AZURE_OPENAI_APIVERSION="2025-04-01-preview"
+```
+
+**Azure OpenAI Configuration Details:**
+- `AZURE_OPENAI_API_KEY`: Your Azure OpenAI service API key
+- `AZURE_OPENAI_API_BASE_URL`: Your Azure OpenAI endpoint URL (e.g., `https://your-resource-name.cognitiveservices.azure.com/openai/`)
+- `AZURE_OPENAI_APIVERSION`: The API version to use (default: `"2025-04-01-preview"`)
+
+When these Azure variables are set, the application will automatically use Azure OpenAI instead of the standard OpenAI API. Make sure your Azure OpenAI deployment includes the `gpt-image-1` model.
+
 #### 🟡 (Optional) Use a Custom API Endpoint
 
 If you need to use an OpenAI-compatible API endpoint (e.g., a local model server or a different provider), you can specify its base URL using the `OPENAI_API_BASE_URL` environment variable in your `.env.local` file:
