@@ -193,7 +193,7 @@ export async function POST(request: NextRequest) {
             const params: OpenAI.Images.ImageEditParams = {
                 model,
                 prompt,
-                image: imageFiles,
+                image: imageFiles[0], // OpenAI API expects a single File, not an array
                 n: Math.max(1, Math.min(n || 1, 10)),
                 size: size === 'auto' ? undefined : size,
                 quality: quality === 'auto' ? undefined : quality
@@ -205,7 +205,7 @@ export async function POST(request: NextRequest) {
 
             console.log('Calling OpenAI edit with params:', {
                 ...params,
-                image: `[${imageFiles.map((f) => f.name).join(', ')}]`,
+                image: imageFiles[0].name,
                 mask: maskFile ? maskFile.name : 'N/A'
             });
             result = await openai.images.edit(params);
