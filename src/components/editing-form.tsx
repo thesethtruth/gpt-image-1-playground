@@ -56,7 +56,6 @@ type EditingFormProps = {
     sourceImagePreviewUrls: string[];
     setImageFiles: React.Dispatch<React.SetStateAction<File[]>>;
     setSourceImagePreviewUrls: React.Dispatch<React.SetStateAction<string[]>>;
-    maxImages: number;
     editPrompt: string;
     setEditPrompt: React.Dispatch<React.SetStateAction<string>>;
     editN: number[];
@@ -117,7 +116,6 @@ export function EditingForm({
     sourceImagePreviewUrls,
     setImageFiles,
     setSourceImagePreviewUrls,
-    maxImages,
     editPrompt,
     setEditPrompt,
     editN,

@@ -751,7 +751,6 @@ export default function HomePage() {
                                 sourceImagePreviewUrls={editSourceImagePreviewUrls}
                                 setImageFiles={setEditImageFiles}
                                 setSourceImagePreviewUrls={setEditSourceImagePreviewUrls}
-                                maxImages={MAX_EDIT_IMAGES}
                                 editPrompt={editPrompt}
                                 setEditPrompt={setEditPrompt}
                                 editN={editN}
