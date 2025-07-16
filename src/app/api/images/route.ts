@@ -199,16 +199,25 @@ export async function POST(request: NextRequest) {
                 quality: quality === 'auto' ? undefined : quality
             };
 
+            
+            
             if (maskFile) {
                 params.mask = maskFile;
             }
-
+            
+            // If using Azure, ensure the API version is set (even when routing through OpenAI compliant endpoints)
+            const AzureAPIVersion = process.env.AZURE_OPENAI_APIVERSION
+            let options = {}
+            if (AzureAPIVersion) {
+                options = {"query": {"api-version": AzureAPIVersion}}
+            }
             console.log('Calling OpenAI edit with params:', {
                 ...params,
                 image: imageFiles[0].name,
-                mask: maskFile ? maskFile.name : 'N/A'
+                mask: maskFile ? maskFile.name : 'N/A',
+                options: options
             });
-            result = await openai.images.edit(params);
+            result = await openai.images.edit(params, options);
         } else {
             return NextResponse.json({ error: 'Invalid mode specified' }, { status: 400 });
         }
