@@ -27,7 +27,7 @@ function createOpenAIClient(): OpenAI | AzureOpenAI {
     }
 }
 
-const openai = createOpenAIClient();
+// OpenAI client will be created when needed in the POST function
 
 const outputDir = path.resolve(process.cwd(), 'generated-images');
 
@@ -134,8 +134,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Missing required parameters: mode and prompt' }, { status: 400 });
         }
 
+        // Create OpenAI client at runtime
+        const openai = createOpenAIClient();
+        
         let result: OpenAI.Images.ImagesResponse;
-        const model = 'gpt-image-1';
+        const model = process.env.MODEL_NAME || 'gpt-image-1';
 
         if (mode === 'generate') {
             const n = parseInt((formData.get('n') as string) || '1', 10);
